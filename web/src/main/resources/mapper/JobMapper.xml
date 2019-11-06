@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.waiter.web.dao.mysql.quartz.JobMapper">
+    <select id="list" resultType="com.waiter.web.entity.quartz.JobAndTrigger">
+        SELECT
+	        t1.JOB_NAME,
+	        t1.JOB_GROUP,
+	        t1.JOB_CLASS_NAME,
+	        t2.CRON_EXPRESSION,
+	        t2.TIME_ZONE_ID,
+	        t3.TRIGGER_NAME,
+	        t3.TRIGGER_GROUP,
+	        t3.TRIGGER_STATE
+        FROM
+	        qrtz_job_details t1
+        LEFT JOIN qrtz_cron_triggers t2 ON t1.JOB_NAME = t2.TRIGGER_NAME
+        AND t1.JOB_GROUP = t2.TRIGGER_GROUP
+        LEFT JOIN qrtz_triggers t3 ON t3.TRIGGER_NAME = t1.JOB_NAME
+        AND t3.TRIGGER_GROUP = t1.JOB_GROUP
+    </select>
+</mapper>

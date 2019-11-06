@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.waiter.web.dao.mysql.shiro.SysRoleMapper">
+    <resultMap id="sysRole" type="com.waiter.web.entity.mysql.SysRole"></resultMap>
+    <resultMap id="sysPermission" type="com.waiter.web.entity.mysql.SysPermission"></resultMap>
+
+    <select id="selectPermissionsByRoleId" resultMap="sysPermission">
+        SELECT
+	        t3.id AS id,
+	        t3.name AS name,
+	        t3.parentIds AS parentIds,
+	        t3.parent_id AS parentId,
+	        t3.permission AS permission,
+	        t3.resource_type AS resourceType,
+	        t3.url AS url
+        FROM
+	        sys_role t1
+        LEFT JOIN sys_role_permission t2 ON t1.id = t2.role_id
+        LEFT JOIN sys_permission t3 ON t3.id =t2.permission_id
+        WHERE t1.id = #{sysRoleId}
+    </select>
+</mapper>

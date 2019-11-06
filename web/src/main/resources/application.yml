@@ -1,0 +1,47 @@
+server:
+  port: 8081
+spring:
+  http:
+    encoding:
+      enabled: true
+      force: true
+  aop:
+    auto: true
+  #spring profile指定使用的配置文件
+  profiles:
+    active: dev
+  #thymeleaf配置
+  thymeleaf:
+    #页面路径，默认为classpath:/templates/
+    prefix: classpath:/templates/
+    #页面后缀，默认为.html，不建议修改，因为html后缀的页面可以在浏览器中直接打开
+    suffix: .html
+    #页面编码
+    encoding: UTF-8
+    mode: HTML5
+    #是否开启缓存
+    cache: false
+    #开启MVC Thymeleaf视图解析（默认值：true）
+    enabled: true
+    #要被排除在解析之外的视图名称列表，用逗号分隔
+    #excluded-view-names:
+    #可解析的视图名称列表，用逗号分隔
+    #view-names:
+    #Thymeleaf模板解析器在解析器链中的顺序。默认情况下，它排第一位。顺序从1开始，只有在定义了额外的TemplateResolver Bean时才需要设置这个属性
+    #template-resolver-order:
+  mvc:
+    #静态资源的url(默认为/**，即直接访问127.0.0.1/xxx.css就行，这里修改成static)
+    static-path-pattern: /static/**
+  #静态资源的存放路径，可填写多个路径，按逗号分隔，spring会按照先后顺序去这些路径下寻找静态资源
+  #它的默认值为:classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  resources:
+    static-locations: classpath:/static/
+  #结合druid配置多数据源时不能加载这个Druid的配置类
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  #springboot2.1以上需要开启bean重写，不然MongoRepository不能使用
+  main:
+    allow-bean-definition-overriding: true
+#Spring Boot默认的logback配置文件为resources/logback-spring.xml里面，可以通过下面的配置定义自己的logback配置文件的路径
+#logging:
+#  config: classpath:xxxxx

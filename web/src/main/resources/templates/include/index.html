@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{include/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="page-body-right">
+        <div class="breadcrumbs">
+            <p>当前位置：数据统计 > <span>数据分析</span></p>
+        </div>
+        <div class="page-container" style="background-color:transparent;">
+            <!-- 数据分析 -->
+            <div class="page-statistics">
+                <div class="page-statistics-content">
+                    <div class="statistics-section tools-bar">
+                        <div class="section-container">
+                            <div class="statistics-tool">
+                                <div class="tool-group">
+                                    <span class="group-name">输入要统计的短网址：</span>
+                                    <input type="text" placeholder="例 : suo.im/4KRNAj">
+                                </div>
+                                <div class="tool-btn-group">
+                                    <button type="button">搜索</button>
+                                </div>
+                            </div>
+                            <ul class="url-info">
+                                <li><span class="info-name">短网址：</span><a th:href="@{http://qfd8.top/vkqabx}"
+                                                                          target="_blank">http://qfd8.top/vkqabx</a>
+                                </li>
+                                <li><span class="info-name">原网址：</span><a
+                                        th:href="@{https://weibo.com/u/5253886395/home?wvr=5}" target="_blank">https://weibo.com/u/5253886395/home?wvr=5</a>
+                                </li>
+                                <li><span class="info-name">备注：</span>
+                                    <p>啊啊啊</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="statistics-section data-analysis">
+                        <div class="section-container">
+                            <!-- tab切换按钮 -->
+                            <ul class="tab-switch-bar clearFloat">
+                                <li><a>访问趋势图</a></li>
+                                <li><a>地域分布图</a></li>
+                                <li><a>操作系统</a></li>
+                                <li><a>访问环境</a></li>
+                                <li><a>访问来源</a></li>
+                                <li><a>最近访问</a></li>
+                            </ul>
+                            <!-- tab内容 -->
+                            <div id="tabBox" class="tab-content-wrap">
+                                <!-- 访问趋势 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame1" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame1" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame1" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame1" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input name="timeFrame1" type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 时长间隔 -->
+                                            <div class="query-criteria line-right">
+                                                <span class="query-criteria-name">时长间隔</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeInterval-1" type="radio" value=""
+                                                                  checked><span>5分钟</span></label>
+                                                    <label><input name="timeInterval-1" type="radio"
+                                                                  value=""><span>1小时 </span></label>
+                                                    <label><input name="timeInterval-1" type="radio"
+                                                                  value=""><span>4小时</span></label>
+                                                    <label><input name="timeInterval-1" type="radio"
+                                                                  value=""><span>1天</span></label>
+                                                    <label><input name="timeInterval-1" type="radio"
+                                                                  value=""><span>3天</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 操作系统 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">操作系统</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="visitSystem-1" type="radio" value=""
+                                                                  checked><span>全部</span></label>
+                                                    <label><input name="visitSystem-1" type="radio"
+                                                                  value=""><span>Android</span></label>
+                                                    <label><input name="visitSystem-1" type="radio"
+                                                                  value=""><span>iOS</span></label>
+                                                    <label><input name="visitSystem-1" type="radio"
+                                                                  value=""><span>Windows</span></label>
+                                                    <label><input name="visitSystem-1" type="radio"
+                                                                  value=""><span>Mac</span></label>
+                                                    <label><input name="visitSystem-1" type="radio"
+                                                                  value=""><span>其他 </span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 访问环境 -->
+                                            <div class="query-criteria line-right">
+                                                <span class="query-criteria-name">访问环境</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="visitPlatform-1" type="radio" value=""
+                                                                  checked><span>全部</span></label>
+                                                    <label><input name="visitPlatform-1" type="radio"
+                                                                  value=""><span>微信</span></label>
+                                                    <label><input name="visitPlatform-1" type="radio"
+                                                                  value=""><span>QQ</span></label>
+                                                    <label><input name="visitPlatform-1" type="radio"
+                                                                  value=""><span>浏览器</span></label>
+                                                    <label><input name="visitPlatform-1" type="radio"
+                                                                  value=""><span>其他</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-right">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <!-- 图表 -->
+                                    <div class="chart-box">
+                                        <ul class="data-block-list">
+                                            <li>
+                                                <span class="block-name">独立访客 (PV)</span>
+                                                <p class="block-value">12345678</p>
+                                            </li>
+                                            <li>
+                                                <span class="block-name">访问量 (UV)</span>
+                                                <p class="block-value">12345678</p>
+                                            </li>
+                                            <li>
+                                                <span class="block-name">独立IP </span>
+                                                <p class="block-value">12345678</p>
+                                            </li>
+                                        </ul>
+                                        <div id="trend-chart" class="trend-chart"></div>
+                                    </div>
+                                </div>
+                                <!-- 访问趋势 end -->
+                                <!-- 地域分布 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame2" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame2" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame2" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame2" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input name="timeFrame2" type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 时长间隔 -->
+                                            <div class="query-criteria line-right">
+                                                <span class="query-criteria-name">时长间隔</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeInterval-2" type="radio" value=""
+                                                                  checked><span>5分钟</span></label>
+                                                    <label><input name="timeInterval-2" type="radio"
+                                                                  value=""><span>1小时 </span></label>
+                                                    <label><input name="timeInterval-2" type="radio"
+                                                                  value=""><span>4小时</span></label>
+                                                    <label><input name="timeInterval-2" type="radio"
+                                                                  value=""><span>1天</span></label>
+                                                    <label><input name="timeInterval-2" type="radio"
+                                                                  value=""><span>3天</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 操作系统 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">操作系统</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="visitSystem-2" type="radio" value=""
+                                                                  checked><span>全部</span></label>
+                                                    <label><input name="visitSystem-2" type="radio"
+                                                                  value=""><span>Android</span></label>
+                                                    <label><input name="visitSystem-2" type="radio"
+                                                                  value=""><span>iOS</span></label>
+                                                    <label><input name="visitSystem-2" type="radio"
+                                                                  value=""><span>Windows</span></label>
+                                                    <label><input name="visitSystem-2" type="radio"
+                                                                  value=""><span>Mac</span></label>
+                                                    <label><input name="visitSystem-2" type="radio"
+                                                                  value=""><span>其他 </span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 访问环境 -->
+                                            <div class="query-criteria line-right">
+                                                <span class="query-criteria-name">访问环境</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="visitPlatform-2" type="radio" value=""
+                                                                  checked><span>全部</span></label>
+                                                    <label><input name="visitPlatform-2" type="radio"
+                                                                  value=""><span>微信</span></label>
+                                                    <label><input name="visitPlatform-2" type="radio"
+                                                                  value=""><span>QQ</span></label>
+                                                    <label><input name="visitPlatform-2" type="radio"
+                                                                  value=""><span>浏览器</span></label>
+                                                    <label><input name="visitPlatform-2 " type="radio"
+                                                                  value=""><span>其他</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-right">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <!-- 地域分布 -->
+                                    <div class="chart-box">
+                                        <div class="chart-line-wrap clearFloat">
+                                            <div class="chart-wrap line-left">
+                                                <div id="map-chart" class="map-chart"></div>
+                                            </div>
+                                            <div class="chart-wrap line-right">
+                                                <div id="area-chart" class="area-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 地域分布 end -->
+                                <!-- 操作系统 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame3" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame3" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame3" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame3" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input id="test28" name="timeFrame3"
+                                                                                      type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-left">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <!-- 图表 -->
+                                    <div class="chart-box">
+                                        <div class="chart-line-wrap clearFloat">
+                                            <div class="chart-wrap line-left">
+                                                <div id="device-chart" class="device-chart"></div>
+                                            </div>
+                                            <div class="chart-wrap line-right">
+                                                <div id="device-top-chart" class="device-top-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 操作系统 end -->
+                                <!-- 访问环境 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame4" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame4" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame4" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame4" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input name="timeFrame4" type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-left">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <div class="chart-box">
+                                        <div class="chart-line-wrap clearFloat">
+                                            <div class="chart-wrap line-left">
+                                                <div id="browser-chart" class="browser-chart"></div>
+                                            </div>
+                                            <div class="chart-wrap line-right">
+                                                <div id="browser-top-chart" class="browser-top-chart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 访问环境 end -->
+                                <!-- 访问来源 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame5" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame5" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame5" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame5" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input name="timeFrame5" type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-left">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <!-- 图表 -->
+                                    <div class="chart-box">
+                                        <div class="table-wrap">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th>数量</th>
+                                                    <th>来路页面</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12324</td>
+                                                    <td>http://baidu.com.cn/</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 访问来源 end -->
+                                <!-- 最近访问 start -->
+                                <div class="tab-content" style="display:none;">
+                                    <!-- 查询条件 -->
+                                    <div class="query-criteria-box clearFloat">
+                                        <div class="query-criteria-wrap clearFloat">
+                                            <!-- 时间范围 -->
+                                            <div class="query-criteria line-left">
+                                                <span class="query-criteria-name">时间范围</span>
+                                                <div class="query-criteria-value">
+                                                    <label><input name="timeFrame6" type="radio" value=""
+                                                                  checked><span>今天</span></label>
+                                                    <label><input name="timeFrame6" type="radio"
+                                                                  value=""><span>昨天</span></label>
+                                                    <label><input name="timeFrame6" type="radio"
+                                                                  value=""><span>近7天</span></label>
+                                                    <label><input name="timeFrame6" type="radio"
+                                                                  value=""><span>近30天</span></label>
+                                                    <label class="select-date"><input name="timeFrame6" type="radio"
+                                                                                      value=""><span>选择时间段</span></label>
+                                                </div>
+                                            </div>
+                                            <!-- 查询按钮 -->
+                                            <div class="query-btn-group line-left">
+                                                <button type="button">查询</button>
+                                            </div>
+                                        </div>
+                                        <i class="holder-line"></i>
+                                    </div>
+                                    <!-- 图表 -->
+                                    <div class="chart-box">
+                                        <div class="table-wrap">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th colspan="6">最近访问记录</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>时间</th>
+                                                    <th>操作系统</th>
+                                                    <th>浏览器</th>
+                                                    <th>IP</th>
+                                                    <th>IP归属地</th>
+                                                    <th>来源</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>2019-07-10 19 : 19 : 54</td>
+                                                    <td>Windows</td>
+                                                    <td>Windows</td>
+                                                    <td>122.140.193.121</td>
+                                                    <td>北京-北京-联通</td>
+                                                    <td>http://6du.in/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2019-07-10 19 : 19 : 54</td>
+                                                    <td>Windows</td>
+                                                    <td>Windows</td>
+                                                    <td>122.140.193.121</td>
+                                                    <td>北京-北京-联通</td>
+                                                    <td>http://6du.in/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2019-07-10 19 : 19 : 54</td>
+                                                    <td>Windows</td>
+                                                    <td>Windows</td>
+                                                    <td>122.140.193.121</td>
+                                                    <td>北京-北京-联通</td>
+                                                    <td>http://6du.in/</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2019-07-10 19 : 19 : 54</td>
+                                                    <td>Windows</td>
+                                                    <td>Windows</td>
+                                                    <td>122.140.193.121</td>
+                                                    <td>北京-北京-联通</td>
+                                                    <td>http://6du.in/</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 最近访问 end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

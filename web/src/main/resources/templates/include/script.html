@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:fragment="script">
+<script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/static/js/jquery.qrcode.min.js}"></script>
+<script th:src="@{/static/js/clipboard.min.js}"></script>
+<script th:src="@{/static/js/toastr.min.js}"></script>
+<script th:src="@{/static/js/laydate/laydate.js}"></script>
+<script th:src="@{/static/js/echart/echarts.min.js}"></script>
+<script th:src="@{/static/js/echart/map/china.js}"></script>
+<script th:src="@{/static/js/chart-config.js}"></script>
+<script th:src="@{/static/js/custom-script.js}"></script>
+<script>
+    $(function () {
+
+        /*
+        * 访问趋势图赋值示例
+        */
+        // 所需数据
+        var trendData = {
+            time: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+            value: {
+                PV: ["3", "0", "0", "0", "0", "0", "0", "3", "25", "53", "36", "21", "7", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+                UV: ["4", "0", "0", "6", "4", "2", "0", "4", "23", "38", "55", "20", "8", "20", "14", "20", "31", "20", "8", "8", "11", "9", "5", "18"],
+                IP: ["2", "0", "0", "0", "0", "0", "0", "1", "9", "20", "15", "10", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+            }
+        };
+        // 调用赋值方法
+        setTrendChartVal(trendData);
+
+
+        /*
+        * 地域分布图赋值示例
+        */
+        // 所需数据
+        var areaData = [
+            {name: "浙江", value: 379},
+            {name: "广东", value: 298},
+            {name: "北京", value: 175},
+            {name: "江苏", value: 174},
+            {name: "陕西", value: 173},
+            {name: "四川", value: 162},
+            {name: "湖北", value: 148},
+            {name: "河南", value: 144},
+            {name: "山东", value: 118},
+            {name: "上海", value: 108},
+            {name: "河北", value: 100},
+            {name: "湖南", value: 85},
+            {name: "福建", value: 83},
+            {name: "山西", value: 77},
+            {name: "江西", value: 72},
+            {name: "贵州", value: 56},
+            {name: "安徽", value: 42},
+            {name: "新疆", value: 37},
+            {name: "云南", value: 35},
+            {name: "辽宁", value: 33},
+            {name: "内蒙古", value: 32},
+            {name: "天津", value: 31},
+            {name: "重庆", value: 29},
+            {name: "广西", value: 24},
+            {name: "宁夏", value: 22},
+            {name: "吉林", value: 19},
+            {name: "黑龙江", value: 18},
+            {name: "甘肃", value: 16},
+            {name: "海南", value: 10},
+            {name: "青海", value: 6},
+            {name: "西藏", value: 1},
+            {name: "台湾", value: 0}
+        ];
+        // 左侧国内访问分布赋值
+        setMapChartVal(areaData);
+        // 右侧访问地区TOP赋值
+        setAreaChartVal(areaData);
+
+
+        /*
+        * 操作系统赋值示例
+        */
+        // 所需数据
+        drivesData = [
+            {name: "Android", value: 778},
+            {name: "PC", value: 696},
+            {name: "iPhone", value: 586},
+            {name: "iPad", value: 107},
+            {name: "Wphone", value: 33}
+        ]
+        // 左侧客户端设备统计赋值
+        setDrivesChartVal(drivesData);
+        // 右侧设备系统赋值
+        setDeviceTopChartVal(drivesData);
+
+
+        /*
+        * 访问环境赋值示例
+        */
+        // 所需数据
+        browserData = [
+            {name: "Chrome", value: 2346},
+            {name: "微信", value: 2382},
+            {name: "Android", value: 792},
+            {name: "OppoBrowser", value: 747},
+            {name: "Safari", value: 169},
+            {name: "Baidu", value: 273},
+            {name: "QQ", value: 519},
+            {name: "UC", value: 261},
+            {name: "Opera", value: 388},
+            {name: "SoGou", value: 280},
+            {name: "猎豹", value: 120},
+            {name: "未识别", value: 258},
+            {name: "115浏览器", value: 50},
+            {name: "支付宝", value: 45},
+            {name: "IE", value: 79},
+            {name: "Firefox", value: 18},
+            {name: "Edge", value: 7},
+            {name: "2345", value: 78},
+            {name: "微博", value: 30},
+            {name: "Maxthon", value: 2}
+        ]
+        // 左侧浏览器统计赋值
+        setBrowserChartVal(browserData);
+        // 右侧浏览器Top赋值
+        setBrowserTopChartVal(browserData);
+
+    });
+</script>
+</body>
+</html>

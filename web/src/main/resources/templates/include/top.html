@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 头部 start -->
+<div class="page-header" th:fragment="top">
+    <!-- pc端头部 -->
+    <div class="pc-header">
+        <!-- logo -->
+        <div class="header-logo">
+            <a><img src="images/nav-logo.png"></a>
+        </div>
+        <!-- 导航 -->
+        <div class="header-nav">
+            <div class="header-nav-pack">
+                <ul class="header-nav-list clearFloat">
+                    <li><a href="http://mrw.so/">首页</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 用户信息 -->
+        <div class="nav-user">
+            <div class="nav-usercenter-pack">
+                <div class="nav-user-center">
+                    <img class="user-icon" src="images/icon-user.png">
+                    <div class="user-info-wrap">
+                        <p class="user-name">用户昵称</p>
+                        <p class="vip-type">免费版</p>
+                    </div>
+                    <div class="nav-user-center-tool">
+                        <ul>
+                            <li>
+                                <a class="user-id" href="">ID: 123456</a>
+                            </li>
+                            <i class="cut-line"></i>
+                            <li>
+                                <a class="vip-buy" href="">套餐购买</a>
+                            </li>
+                            <li>
+                                <a class="signout-btn">退出登录</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 移动端头部 -->
+    <div class="mobile-header">
+        <p class="mobile-header-title">短网址</p>
+        <div class="mobile-header-btngroup">
+            <button id="menuBtn" class="iconfont icon-menu btn-menu"></button>
+        </div>
+    </div>
+</div>
+<!-- 头部 end -->
+</body>
+</html>

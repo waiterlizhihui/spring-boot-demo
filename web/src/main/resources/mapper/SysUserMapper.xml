@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.waiter.demo.dao.mysql.SysUserMapper">
+    <resultMap id="sysUser" type="com.waiter.web.entity.mysql.SysUser"/>
+    <resultMap id="sysRole" type="com.waiter.web.entity.mysql.SysRole"/>
+
+    <parameterMap id="user" type="com.waiter.web.entity.mysql.SysUser"/>
+
+    <select id="getUserList" resultMap="sysUser">
+        SELECT  * FROM SYS_USER
+    </select>
+
+    <select id="selectByPage" resultMap="sysUser">
+        SELECT  * FROM SYS_USER
+    </select>
+
+    <select id="selectRolesByUserId" resultMap="sysRole">
+        SELECT
+            t3.id AS id,
+	        t3.role AS role,
+	        t3.description AS description
+        FROM
+	        sys_user t1
+        LEFT JOIN sys_user_role t2 ON t1.id = t2.user_id
+        LEFT JOIN sys_role t3 ON t3.id =t2.role_id
+        WHERE t1.id = #{sysUserId}
+    </select>
+</mapper>
+

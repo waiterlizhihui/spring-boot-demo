@@ -1,0 +1,143 @@
+@media (max-width: 1700px) {
+    .page {
+        padding-top: 70px;
+    }
+
+    /* 头部 */
+    .page-header {
+        height: 70px;
+    }
+
+    /* 头部导航 */
+    .header-nav-list li {
+        margin-right: 35px;
+    }
+
+    /* 页面主体 */
+    .page-body-left,
+    .page-body-right {
+        min-height: -moz-calc(100vh - 70px - 70px);
+        min-height: -webkit-calc(100vh - 70px - 70px);
+        min-height: calc(100vh - 70px - 70px);
+    }
+
+    /* 右侧内容 */
+    .page-body-right {
+        padding: 0 26px 20px;
+    }
+
+    .page-container {
+        min-height: 600px;
+    }
+
+    /* 短网址列表 */
+    .top-tools-list li input,
+    .top-tools-list li select {
+        width: 175px;
+    }
+
+    .top-tools-list li select {
+        width: 120px;
+    }
+
+    /* 数据统计 */
+    /* .section-container{
+      width: 1120px;
+    }
+    .chart-box{
+      height: 425px;
+    }
+    .map-box{
+      height: 675px;
+    }
+    .chart-box .pie-chart,
+    .chart-box .bar-chart{
+      height: 372px;
+    } */
+    /* 数据统计 */
+    .page-statistics {
+        min-width: 1240px;
+    }
+
+    .tab-content-wrap {
+        width: 1200px;
+    }
+
+    .query-criteria-box {
+        padding: 5px 17px 0;
+    }
+
+    .query-btn-group.line-right {
+        margin-left: 50%;
+    }
+
+    .chart-box {
+        padding: 20px 18px 5px;
+    }
+
+    .trend-chart {
+        width: 1160px;
+        height: 410px;
+        margin-top: 25px;
+    }
+
+    .map-chart {
+        width: 580px;
+        height: 400px;
+    }
+
+    .area-chart {
+        width: 580px;
+        height: 400px;
+    }
+
+    .device-chart {
+        width: 510px;
+        height: 410px;
+    }
+
+    .device-top-chart {
+        width: 510px;
+        height: 410px;
+    }
+
+    .browser-chart {
+        width: 500px;
+        height: 410px;
+    }
+
+    .browser-top-chart {
+        width: 600px;
+        height: 410px;
+    }
+
+
+    /* 个人中心 */
+    .page-userCenter-box {
+        padding: 60px;
+        margin: 70px auto;
+    }
+
+    .user-info-list .value-wrap {
+        height: 40px;
+    }
+
+    .userCenter-btn-group {
+        margin-top: 60px;
+    }
+
+    /* 页脚 */
+    .page-footer {
+        height: 70px;
+    }
+
+    .copyright {
+        margin-top: 8px;
+    }
+
+    /* 提示框 */
+    .toast-top-center {
+        top: 75px;
+    }
+}
+  
