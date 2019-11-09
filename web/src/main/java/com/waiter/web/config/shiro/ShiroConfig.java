@@ -1,16 +1,19 @@
 package com.waiter.web.config.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import org.apache.shiro.mgt.SecurityManager;
 import com.waiter.web.sso.shiro.ShiroFormFilter;
 import com.waiter.web.sso.shiro.ShiroRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -19,6 +22,7 @@ import java.util.Map;
 //import org.crazycake.shiro.RedisCacheManager;
 //import org.crazycake.shiro.RedisSessionDAO;
 
+//https://blog.csdn.net/weixin_39781526/article/details/79759762
 /**
  * @ClassName ShiroConfig
  * @Description TOOD
@@ -42,7 +46,7 @@ public class ShiroConfig {
         filterChain.put("/static/*", "anon");
         filterChain.put("/logout", "logout");
         filterChain.put("/login", "authc");
-//        filterChain.put("/**", "authc");
+        filterChain.put("/shiro/*", "authc");
         filterChain.put("/**", "anon");
 
         //登录地址
@@ -53,6 +57,16 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChain);
         return shiroFilterFactoryBean;
+    }
+
+    /**
+     * shiro生命周期管理
+     *
+     * @return
+     */
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 
     /**
@@ -70,19 +84,40 @@ public class ShiroConfig {
 
 
     @Bean
-    public ShiroRealm shiroRealm() {
+    @DependsOn(value = {"lifecycleBeanPostProcessor", "ShiroRedisCacheManager"})
+    public ShiroRealm shiroRealm(RedisTemplate redisTemplate) {
         ShiroRealm shiroRealm = new ShiroRealm();
+        //设置密码加密方式
         shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+
+        //设置缓存管理器
+        shiroRealm.setCacheManager();
+        shiroRealm.setCachingEnabled(true);
+        //授权与登录认证禁止缓存
+        shiroRealm.setAuthorizationCachingEnabled(false);
+        shiroRealm.setAuthenticationCachingEnabled(false);
         return shiroRealm;
     }
 
     @Bean
-    public SecurityManager securityManager() {
+    public SecurityManager securityManager(RedisTemplate redisTemplate) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(shiroRealm());
+        //设置realm
+        defaultWebSecurityManager.setRealm(shiroRealm(redisTemplate));
+        //设置session管理器，用redis进行管理
+        defaultWebSecurityManager.setSessionManager();
+
         return defaultWebSecurityManager;
     }
 
+    @Bean(name = "ShiroRedisCacheManager")
+    public ShiroRe
+
+    /**
+     * 开启shiro aop注解支持
+     *
+     * @return
+     */
     @Bean
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
@@ -90,6 +125,12 @@ public class ShiroConfig {
         return advisorAutoProxyCreator;
     }
 
+    /**
+     * 开启shiro aop注解支持
+     *
+     * @param securityManager
+     * @return
+     */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
